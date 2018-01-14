@@ -30,7 +30,7 @@ router.post('/',function(req,res){
 
         }
         else if(req.body.result.parameters.defineCategory){
-            let category = req.body.parameters.Category.toString();
+            let category = req.body.result.parameters.Category.toString();
 
             let brands = helpers.getBrandsOfCategory(category);
 
