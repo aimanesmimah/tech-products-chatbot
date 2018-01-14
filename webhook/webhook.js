@@ -32,7 +32,7 @@ router.post('/',function(req,res){
         else if(req.body.result.parameters.defineCategory){
             let category = req.body.result.parameters.Category.toString();
 
-            let brands = helpers.getBrandsOfCategory(category);
+            let brands = helpers.getBrandsOfCategory(category.toLowerCase());
 
             if(brands.length) {
                 speech = "the brands we have for " + category + " " +
@@ -48,7 +48,7 @@ router.post('/',function(req,res){
                 speech = " May you choose one ?";
             }
             else
-                speech = "unfortunately, we have currently any brand for this " + category ;
+                speech = "unfortunately, we have currently any brand for " + category + " category" ;
 
 
         }
