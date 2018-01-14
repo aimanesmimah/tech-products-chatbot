@@ -29,7 +29,7 @@ router.post('/',function(req,res){
             }
 
         }
-        else if(req.body.parameters.defineCategory){
+        else if(req.body.result.parameters.defineCategory){
             let category = req.body.parameters.Category.toString();
 
             let brands = helpers.getBrandsOfCategory(category);
@@ -51,6 +51,10 @@ router.post('/',function(req,res){
                 speech = "unfortunately, we have currently any brand for this " + category ;
 
 
+        }
+
+        else{
+            speech = "sorry! something bad happened";
         }
 
 
