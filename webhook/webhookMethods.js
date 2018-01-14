@@ -67,9 +67,9 @@ module.exports.defineBrandMethod = function (req) {
 
     for(let i=0 ; i < prods.length ; i++){
         if(i === prods.length - 1)
-            speech += prods[i] + ".";
+            speech += prods[i].name + ".";
         else
-            speech += prods[i] + ", " ;
+            speech += prods[i].name + ", " ;
     }
 
     speech += " Did you like one of them ?";
