@@ -21,3 +21,18 @@ module.exports.getCategoriesOfBrand = brand => {
     return removeDuplicates(result);
 }
 
+module.exports.getProductsOfCategoryAndBrand = (category,brand) => {
+    let products = data.products ;
+
+    const result = products.filter(prod => prod.brand === brand && prod.category === category)
+        .map(prod => {
+            return {
+                name : prod.name ,
+                price : prod.subprice
+            }
+            });
+
+    return result;
+
+}
+
