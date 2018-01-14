@@ -35,14 +35,14 @@ router.post('/',function(req,res){
             let brands = helpers.getBrandsOfCategory(category.toLowerCase());
 
             if(brands.length) {
-                speech += "the brands we have for " + category + " " +
+                speech = "the brands we have for " + category + " " +
                     "are : ";
 
                 for(let i=0 ; i < brands.length ; i++){
                     if(i === brands.length - 1)
                         speech += brands[i] + ".";
                     else
-                        speech += brands[i] + "," ;
+                        speech += brands[i] + ", " ;
                 }
 
                 speech += " May you choose one ?";
