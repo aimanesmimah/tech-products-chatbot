@@ -35,3 +35,8 @@ socket.on('bot_reply', function(replyText) {
 
     $('#answer').html("You get : " + replyText);
 });
+
+socket.on('connect',()=>{
+
+    //synthVoice(message);
+});

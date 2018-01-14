@@ -9,7 +9,7 @@ var debug = require('debug')('chatbotApp:server');
 var http = require('http');
 
 
-const API_TOKEN = '0d8a0ad446bc42c5803db3dbd5de0de6' ;
+const API_TOKEN = 'c9e72eb5dc774ffa9a53d0038e00fab2' ;
 const apiai = require('apiai')(API_TOKEN);
 
 /**
