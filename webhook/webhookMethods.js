@@ -127,12 +127,13 @@ module.exports.defineProducts = function (req) {
 }
 
 module.exports.defineMoreAboutMethod = function (req) {
-    //let moreAbout = req.body.result.parameters.defineMoreAbout;
+    let specGB = req.body.result.parameters.specificationGB;
+    let specRAM = req.body.result.parameters.specificationRAM ;
     let info = req.body.result.parameters.specificationNumber.toString();
 
-    if(req.body.result.parameters.specificationGB)
+    if(specGB && !specRAM)
         info += "GB";
-    if(req.body.result.parameters.specificationRAM)
+    if(specRAM || ( specGB && specRAM ))
         info += "GB RAM";
     else
         info += "";
