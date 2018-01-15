@@ -60,19 +60,26 @@ module.exports.defineBrandMethod = function (req) {
 
     let speech ;
 
-    speech = "this is all " +state.currentCategory+ " products we have for " + brand + " brand." ;
-    speech += " we have : \n" ;
-
-
-
-    for(let i=0 ; i < prods.length ; i++){
-        if(i === prods.length - 1)
-            speech += "and Finally " +prods[i].name + ".\n";
-        else
-            speech += prods[i].name + ". " ;
+    if(prods.length === 1){
+        speech = "we have only one product for now and that is: " + prods[0].name + "." +
+           " Do you want to pick it up?";
     }
+    else {
+        speech = "this is all " + state.currentCategory + " products we have for " + brand + " brand.";
+        speech += " we have : \n";
 
-    speech += " Did you like one of them ?";
+
+        for (let i = 0; i < prods.length; i++) {
+            if (i === prods.length - 1 && prods.length === 2)
+                speech += "and " + prods[i].name + ".\n";
+            if (i === prods.length - 1)
+                speech += "and Finally " + prods[i].name + ".\n";
+            else
+                speech += prods[i].name + ". ";
+        }
+
+        speech += " Did you like one of them ?";
+    }
 
     return speech ;
 }
