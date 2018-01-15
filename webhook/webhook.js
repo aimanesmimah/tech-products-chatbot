@@ -16,7 +16,6 @@ router.post('/',function(req,res){
 
         if (req.body.result.parameters.presentStore) {
             speech = webhookMethods.readyToStartConfirmation(req);
-
         }
         else if(req.body.result.parameters.defineCategory){
             speech = webhookMethods.defineCategoryMethod(req);
@@ -26,6 +25,12 @@ router.post('/',function(req,res){
         }
         else if(req.body.result.parameters.productConfirmation){
             speech = webhookMethods.productionConfirmationMethod(req);
+        }
+        else if(req.body.result.parameters.defineProduct){
+            speech = webhookMethods.defineProducts(req);
+        }
+        else if(req.body.result.parameters.defineMoreAbout){
+            speech = webhookMethods.defineMoreAboutMethod(req);
         }
         else{
             speech = "sorry! something bad happened";

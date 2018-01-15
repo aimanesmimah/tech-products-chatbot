@@ -2,5 +2,7 @@
 
 module.exports = {
     currentCategory : "",
-    currentBrand : ""
+    currentBrand : "",
+    currentProduct : "",
+    currentMoreInfos : ""
 }

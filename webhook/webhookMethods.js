@@ -61,15 +61,15 @@ module.exports.defineBrandMethod = function (req) {
     let speech ;
 
     speech = "this is all " +state.currentCategory+ " products we have for " + brand + " brand." ;
-    speech += " we have : " ;
+    speech += " we have : \n" ;
 
 
 
     for(let i=0 ; i < prods.length ; i++){
         if(i === prods.length - 1)
-            speech += prods[i].name + ".";
+            speech += "and Finally " +prods[i].name + ".\n";
         else
-            speech += prods[i].name + ", " ;
+            speech += prods[i].name + ". " ;
     }
 
     speech += " Did you like one of them ?";
@@ -92,6 +92,65 @@ module.exports.productionConfirmationMethod = function (req) {
     }
 
     return speech;
+}
+
+module.exports.defineProducts = function (req) {
+    let productName = req.body.result.parameters.productName;
+    let prods = helpers.getMatchedProducts(productName);
+
+    state.currentProduct = productName;
+
+    var resultProds = prods.filter(
+        prod => prod.category === state.currentCategory && prod.brand === state.currentBrand );
+
+    let speech ;
+
+
+    if(resultProds.length){
+        if(resultProds.length === 1)
+            speech = "this is your dream product. The subscription plan for this " +
+                "product is : " + resultProds[0].subprice + "\nAre you happy " +
+                "with this deal";
+        else{
+            speech = "this corresponds to " + resultProds.length + " products. " +
+                "Which one you want. Say more about it" ;
+        }
+    }
+    else if(!resultProds.length){
+        speech = "no " + productName + " corrensponds to this brand";
+    }
+    else{
+        speech = "something bad happened";
+    }
+
+    return speech;
+}
+
+module.exports.defineMoreAboutMethod = function (req) {
+    let moreAbout = req.body.result.parameters.defineMoreAbout;
+    let prods = helpers.getMatchedProducts(moreAbout);
+
+    state.currentMoreInfos = moreAbout ;
+
+    var resultProds = prods.filter(
+        prod => prod.category === state.currentCategory
+            && prod.brand === state.currentBrand );
+
+    let speech;
+
+
+    if(resultProds.length){
+       speech = "this is your dream product. We got it for you. The subscription " +
+           "plan for this one is : " + resultProds[0].subprice;
+    }
+    else{
+        speech = "sorry! we didn't find what you're looking for. Check our products " +
+            "and choose one of them";
+    }
+
+    return speech;
+
+
 }
 
 

@@ -36,3 +36,12 @@ module.exports.getProductsOfCategoryAndBrand = (category,brand) => {
 
 }
 
+
+module.exports.getMatchedProducts = text => {
+    let products = data.products;
+
+    const result = products.filter(prod => prod.name.includes(text.toString()));
+
+    return result ;
+}
+
