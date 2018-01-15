@@ -127,10 +127,19 @@ module.exports.defineProducts = function (req) {
 }
 
 module.exports.defineMoreAboutMethod = function (req) {
-    let moreAbout = req.body.result.parameters.defineMoreAbout;
-    let prods = helpers.getMatchedProducts(req.body.result.parameters.specificationNumber);
+    //let moreAbout = req.body.result.parameters.defineMoreAbout;
+    let info = req.body.result.parameters.specificationNumber.toString();
 
-    state.currentMoreInfos = moreAbout ;
+    if(req.body.result.parameters.specificationGB)
+        info += "GB";
+    if(req.body.result.parameters.specificationRAM)
+        info += "GB RAM";
+    else
+        info += "";
+
+    let prods = helpers.getMatchedProducts(info);
+
+    state.currentMoreInfos = info ;
 
     var resultProds = prods.filter(
         prod => prod.category === state.currentCategory
