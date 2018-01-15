@@ -128,13 +128,14 @@ module.exports.defineProducts = function (req) {
 
 module.exports.defineMoreAboutMethod = function (req) {
     let moreAbout = req.body.result.parameters.defineMoreAbout;
-    let prods = helpers.getMatchedProducts(moreAbout);
+    let prods = helpers.getMatchedProducts(req.body.result.parameters.specificationNumber);
 
     state.currentMoreInfos = moreAbout ;
 
     var resultProds = prods.filter(
         prod => prod.category === state.currentCategory
-            && prod.brand === state.currentBrand );
+            && prod.brand === state.currentBrand
+            && prod.name.includes(state.currentProduct));
 
     let speech;
 
