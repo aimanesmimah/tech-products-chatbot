@@ -11,6 +11,7 @@ module.exports = function (conversationState) {
         case 'categories' :
             data.message = "categories";
             data.categories = helpers.getAllCategories();
+            break;
         case 'category' :
             data.message = "category";
             data.category = {
