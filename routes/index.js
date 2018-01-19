@@ -17,9 +17,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/test',function (req,res) {
-   res.json({success:true,method:"GET method",reponse:"success"});
-});
 
 router.post('/test',function (req,res) {
    res.json({success:true,method:"POST method",response:"success"});
