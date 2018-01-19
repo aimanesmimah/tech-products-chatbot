@@ -38,5 +38,16 @@ router.post('/chatbotMessage',function (req,res) {
 
 });
 
+router.get('/chatbotMessage/:message',function (req,res) {
+    //console.log('reached');
+    var userMessage = req.params.message;
+
+
+    apiaiSDK(userMessage,function (response) {
+        let data = dataSentToBrowser(conversationState.currentState);
+        res.json({success : true , botResponse : response? response : "no response",data : data});
+    });
+
+});
 
 module.exports = router;
