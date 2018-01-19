@@ -16,7 +16,7 @@ const apiai = require('apiai')(API_TOKEN);
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '7000');
 app.set('port', port);
 
 /**
@@ -33,8 +33,9 @@ io.on('connection',function (socket) {
 
     console.log('dkhaal');
 
+
     let apiaiReq = apiai.textRequest(text,{
-      sessionId : 'aymansmimahSessionId'
+      sessionId : 'cloudstrifeSessionId'
     });
 
     apiaiReq.on('response',(response)=>{

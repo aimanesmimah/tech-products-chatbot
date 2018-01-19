@@ -5,6 +5,15 @@ function removeDuplicates(array) {
     return array.filter((elem, pos, arr) => arr.indexOf(elem) == pos);
 }
 
+
+module.exports.getAllCategories = () => {
+    let products = data.products;
+
+    const result = products.map(prod => prod.category);
+
+    return removeDuplicates(result);
+}
+
 module.exports.getBrandsOfCategory = category => {
     let products = data.products;
 

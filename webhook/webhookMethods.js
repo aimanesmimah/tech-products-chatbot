@@ -7,8 +7,24 @@ module.exports.readyToStartConfirmation = function (req) {
     let speech ;
 
     if (response === "yes") {
+        let categories = helpers.getAllCategories();
+        state.currentState = "categories";
+
         speech = "Nice! so I'm gonna introduce you " +
-            "to the categories of products we have";
+            "to the categories of products in our store.";
+
+        for(let i = 0 ; i < categories.length ; i++){
+            if(i = 0 ) {
+                speech += " First we have : " + categories[i] + ". Then, There is : ";
+            }
+            else if(i = categories.length - 1){
+                speech += " Finally we have : " + categories[i] + "."
+            }
+            else{
+                speech += categories[i] + ", " ;
+            }
+
+        }
 
     }
     else if (response === "no") {
@@ -25,6 +41,7 @@ module.exports.readyToStartConfirmation = function (req) {
 module.exports.defineCategoryMethod = function (req) {
     let category = req.body.result.parameters.Category.toString().toLowerCase();
 
+    state.currentState = "category";
     state.currentCategory = category;
 
     let brands = helpers.getBrandsOfCategory(category);
@@ -53,6 +70,8 @@ module.exports.defineCategoryMethod = function (req) {
 module.exports.defineBrandMethod = function (req) {
 
     let brand = req.body.result.parameters.Brand.toString().toLowerCase();
+
+    state.currentState = "brand";
     state.currentBrand = brand;
 
 
@@ -105,6 +124,7 @@ module.exports.defineProducts = function (req) {
     let productName = req.body.result.parameters.productName;
     let prods = helpers.getMatchedProducts(productName);
 
+    state.currentState = "product";
     state.currentProduct = productName;
 
     var resultProds = prods.filter(
@@ -138,6 +158,9 @@ module.exports.defineMoreAboutMethod = function (req) {
     let specRAM = req.body.result.parameters.specificationRAM ;
     let info = req.body.result.parameters.specificationNumber.toString();
 
+    state.currentState = "product";
+    state.currentMoreInfos = info ;
+
     if(specGB && !specRAM)
         info += "GB";
     if(specRAM || ( specGB && specRAM ))
@@ -147,7 +170,7 @@ module.exports.defineMoreAboutMethod = function (req) {
 
     let prods = helpers.getMatchedProducts(info);
 
-    state.currentMoreInfos = info ;
+
 
     var resultProds = prods.filter(
         prod => prod.category === state.currentCategory
