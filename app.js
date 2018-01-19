@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var webhook = require('./webhook/webhook');
 
 var app = express();
 
@@ -34,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/webhook',webhook);
 
 
 

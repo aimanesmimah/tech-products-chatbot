@@ -1,7 +1,7 @@
 var express = require('express');
 var apiaiSDK = require('../apiai/apiai_sdk');
 var router = express.Router();
-var conversationState = require('../webhook/conversationState');
+var conversation = require('../webhook/conversationState');
 var dataSentToBrowser = require('./dataSendToBrowser');
 
 
@@ -41,8 +41,9 @@ router.get('/chatbotMessage/:message',function (req,res) {
 
 
     apiaiSDK(userMessage,function (response) {
-        let data = dataSentToBrowser(conversationState.currentState);
-        res.json({success : true , botResponse : response? response : "no response",data : data});
+        let data = dataSentToBrowser(conversation.currentState);
+        res.json({success : true , botResponse : response? response : "no response",
+            data : data,currentState : conversation.currentState});
     });
 
 });
