@@ -14,10 +14,10 @@ module.exports.readyToStartConfirmation = function (req) {
             "to the categories of products in our store.";
 
         for(let i = 0 ; i < categories.length ; i++){
-            if(i = 0 ) {
+            if(i === 0 ) {
                 speech += " First we have : " + categories[i] + ". Then, There is : ";
             }
-            else if(i = categories.length - 1){
+            else if(i === categories.length - 1){
                 speech += " Finally we have : " + categories[i] + "."
             }
             else{
