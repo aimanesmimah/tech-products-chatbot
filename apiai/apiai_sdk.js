@@ -17,7 +17,7 @@ module.exports = function (message,callback) {
         conversation.changeState(response);
 
 
-        callback(response.result.fulfillment.speech);
+        callback(response.result.fulfillment.speech,conversation);
 
     });
 

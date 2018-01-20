@@ -1,38 +1,41 @@
+var helpers = require('../data/helpers');
 
 
-
-module.exports = function (conversationState) {
+module.exports = function (conversation) {
     let data = {};
 
-    switch (conversationState){
+    switch (conversation.currentState){
         case 'nothing' :
             data.message = "no data";
             break;
         case 'categories' :
             data.message = "categories";
-            data.categories = helpers.getAllCategories();
+            data.payload = {
+                name : "store",
+                items : helpers.getAllCategories()
+            }
             break;
         case 'category' :
             data.message = "category";
-            data.category = {
-                name : conversationState.currentCategory,
-                brands : helpers.getBrandsOfCategory(conversationState)
+            data.payload = {
+                name : conversation.currentCategory,
+                items : helpers.getBrandsOfCategory(conversation.currentCategory)
             }
             break;
         case 'brand' :
             data.message = "brand";
-            data.brand = {
-                name : conversationState.currentBrand,
-                products :
-                    helpers.getProductsOfCategoryAndBrand(conversationState.currentCategory,conversationState.currentBrand)
+            data.payload = {
+                name : conversation.currentBrand,
+                items :
+                    helpers.getProductsOfCategoryAndBrand(conversation.currentCategory,conversation.currentBrand)
             }
 
             break;
         case 'product' :
             data.message = "product";
-            data.product = {
-                name : conversationState.currentProduct,
-                products : helpers.getMatchedProducts(conversationState.currentProduct)
+            data.payload = {
+                name : conversation.currentProduct,
+                items : helpers.getMatchedProducts(conversation.currentProduct)
             }
             break;
         default :
