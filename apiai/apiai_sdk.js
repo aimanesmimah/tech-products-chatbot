@@ -7,7 +7,7 @@ module.exports = function (message,callback) {
 
 
     let apiaiReq = apiai.textRequest(message,{
-        sessionId : 'aymanSessionId'
+        sessionId : 'cloudstrifeSessionId'
     });
 
     apiaiReq.on('response',(response)=>{
@@ -23,8 +23,8 @@ module.exports = function (message,callback) {
 
 
     apiaiReq.on('error',(error)=>{
-        console.log("api.ai error" + error);
-        callback("some system error occured. Try again!");
+        console.log("api.ai error : " + error);
+        callback("some network problems occured. Try again!",conversation);
 
     });
 
