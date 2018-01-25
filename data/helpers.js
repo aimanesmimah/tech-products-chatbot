@@ -54,3 +54,8 @@ module.exports.getMatchedProducts = text => {
     return result ;
 }
 
+
+module.exports.getFullMatchedProducts = matchedProducts => {
+
+}
+

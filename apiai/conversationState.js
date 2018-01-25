@@ -50,6 +50,17 @@ module.exports = {
                 this.currentState = "product";
                 this.currentMoreInfos = info;
             }
+            else if(response.result.parameters.brandFallsOutside){
+                this.currentState = "category";
+                this.currentBrand = response.result.parameters.Brand.toString().toLowerCase()
+            }
+            else if(response.result.parameters.brandFallsOutsideConfirmation){
+                this.currentState = "nothing";
+            }
+            else if(response.result.parameters.chooseCategoryBrandFallOutside){
+                this.currentState = "category";
+                this.currentBrand = response.result.parameters.Brand.toString().toLowerCase()
+            }
             else if(response.result.fulfillment.speech === "sorry! something bad happened. Try again!"){
                 this.currentState = "nothing";
             }
