@@ -29,7 +29,13 @@ module.exports = function (conversation) {
                 items :
                     helpers.getProductsOfCategoryAndBrand(conversation.currentCategory,conversation.currentBrand)
             }
-
+            break;
+        case 'brandFallsOutside' :
+            data.message = "brand_falls_outside";
+            data.payload = {
+                name : conversation.currentBrand,
+                items : helpers.getCategoriesOfBrand(conversation.currentBrand)
+            }
             break;
         case 'product' :
             data.message = "product";

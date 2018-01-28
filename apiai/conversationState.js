@@ -51,7 +51,7 @@ module.exports = {
                 this.currentMoreInfos = info;
             }
             else if(response.result.parameters.brandFallsOutside){
-                this.currentState = "category";
+                this.currentState = "brandFallsOutside";
                 this.currentBrand = response.result.parameters.Brand.toString().toLowerCase()
             }
             else if(response.result.parameters.brandFallsOutsideConfirmation){
