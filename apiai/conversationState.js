@@ -12,12 +12,18 @@ module.exports = {
         if(response.result && response.result.parameters) {
             if (response.result.parameters.presentStore) {
                 //speech = webhookMethods.readyToStartConfirmation(req);
-                this.currentState = "nothing";
+
 
                 if (response.result.parameters.option === "yes") {
+
                     this.currentState = "categories";
 
                 }
+                else{
+                    this.currentState = "nothing";
+                }
+
+
             }
             else if (response.result.parameters.defineCategory) {
                 //speech = webhookMethods.defineCategoryMethod(req);
@@ -47,19 +53,34 @@ module.exports = {
 
                 let info = response.result.parameters.specificationNumber.toString();
 
+
                 this.currentState = "product";
                 this.currentMoreInfos = info;
             }
+            else if(response.result.parameters.dreamProduct){
+                let dreamProduct = response.result.parameters.product.toString();
+                this.currentState = "dreamProduct";
+                this.currentProduct = dreamProduct;
+
+            }
             else if(response.result.parameters.brandFallsOutside){
+                console.log('brandFallsOutside');
                 this.currentState = "brandFallsOutside";
                 this.currentBrand = response.result.parameters.Brand.toString().toLowerCase()
             }
             else if(response.result.parameters.brandFallsOutsideConfirmation){
+
                 this.currentState = "nothing";
             }
             else if(response.result.parameters.chooseCategoryBrandFallOutside){
-                this.currentState = "category";
+                console.log('chooseCategoryBrandFallOutside');
+                this.currentState = "categoryFallsOutside";
                 this.currentBrand = response.result.parameters.Brand.toString().toLowerCase()
+            }
+            else if(response.result.parameters.getCategoryBrandFallsOutside){
+                console.log('getCategoryBrandFallsOutside');
+                this.currentState = "productFallsOutside";
+                this.currentCategory = response.result.parameters.Category.toString().toLowerCase();
             }
             else if(response.result.fulfillment.speech === "sorry! something bad happened. Try again!"){
                 this.currentState = "nothing";
@@ -71,6 +92,7 @@ module.exports = {
 
         }
         else{
+
             this.currentState = "nothing";
         }
     }

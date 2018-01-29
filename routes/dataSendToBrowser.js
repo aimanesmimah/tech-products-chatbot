@@ -37,6 +37,20 @@ module.exports = function (conversation) {
                 items : helpers.getCategoriesOfBrand(conversation.currentBrand)
             }
             break;
+        case 'categoryFallsOutside' :
+            data.message = "category_falls_outside";
+            data.payload = {
+                name : conversation.currentBrand,
+                items : helpers.getCategoriesOfBrand(conversation.currentBrand)
+            }
+            break;
+        case 'productFallsOutside' :
+            data.message = "product_falls_outside";
+            data.payload = {
+                name : conversation.currentCategory,
+                items : helpers.getProductsOfCategoryAndBrand(conversation.currentCategory,conversation.currentBrand)
+            }
+            break;
         case 'product' :
             data.message = "product";
             data.payload = {
@@ -44,7 +58,15 @@ module.exports = function (conversation) {
                 items : helpers.getMatchedProducts(conversation.currentProduct)
             }
             break;
+        case 'dreamProduct' :
+            data.message = "dreamProduct";
+            data.payload = {
+                name : conversation.currentProduct,
+                items : helpers.getMatchedProducts(conversation.currentProduct)
+            }
+            break;
         default :
+            console.log('default');
             data.message = "no data";
     }
 
