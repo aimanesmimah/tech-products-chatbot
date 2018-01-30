@@ -43,7 +43,7 @@ router.get('/chatbotMessage/:message',function (req,res) {
     apiaiSDK(userMessage,function (response,conversation) {
         let data = dataSentToBrowser(conversation);
         res.json({success : true ,
-            botResponse : response? response : "it seems that some problems occured. Try again please!",
+            botResponse : response? response : "it seems that network problems occured. Try again please!",
             data : data,currentState : response?  conversation.currentState : "nothing"});
     });
 
